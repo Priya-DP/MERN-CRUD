@@ -1,9 +1,12 @@
 const express = require("express");
-const path = require("path");
-const dotenv = require("dotenv");
 const movie = require("./routes/movie-route");
+const bodyParser = require('body-parser');
+
 const app = express();
-dotenv.config({ path: path.join(__dirname, "config", "config.env") });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.json({ mgs: "Hello world" });
@@ -12,8 +15,4 @@ app.get("/", (req, res) => {
 // router using
 app.use("/", movie);
 
-app.listen(process.env.PORT, () => {
-  console.log(
-    `Server listening to the port ${process.env.PORT} in ${process.env.NODE_ENV} `
-  );
-});
+module.exports = app;

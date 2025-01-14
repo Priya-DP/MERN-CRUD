@@ -1,26 +1,27 @@
 const express = require("express");
 const router = express.Router();
+const {
+  getMovie,
+  CreateMovie,
+  UpdateMovie,
+  DeleteMovie,
+  getMovieById,
+} = require("../controller/movie-controller");
 
 // CRUD Functionality
 
 // R- Reading (View)
-router.get("/movies", (req, res) => {
-  res.send("view movies...!");
-});
+router.get("/movies", getMovie);
+
+router.get("/movies/:id", getMovieById);
 
 // c - Create
-router.post("/movies", (req, res) => {
-  res.send("create movie successfully");
-});
+router.post("/movies", CreateMovie);
 
 //  U - update
-router.put("/movies/:id", (req, res) => {
-  res.send("move update properly");
-});
+router.put("/movies/:id", UpdateMovie);
 
 // D -Delete
-router.delete("/movie/:id", (req, res) => {
-  res.send("Movie delete successfully");
-});
+router.delete("/movie/:id", DeleteMovie);
 
 module.exports = router;
